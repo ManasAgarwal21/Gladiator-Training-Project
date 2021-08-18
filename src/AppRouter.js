@@ -6,6 +6,8 @@ import NotFoundPage from './pages/NotFound.page';
 import DashboardPage from './pages/Dashboard.page';
 
 const AppRouter = (props) => {
+    const [name,setName] = React.useState("");
+
     return <>
         <BrowserRouter>
             <Switch>
@@ -13,13 +15,13 @@ const AppRouter = (props) => {
                     <Redirect to="/login" />
                 </Route>
                 <Route path="/login" exact>
-                    <LoginPage />
+                    <LoginPage setName={setName}/>
                 </Route>
                 <Route path="/signup" exact>
-                    <SignupPage />
+                    <SignupPage setName={setName}/>
                 </Route>
                 <Route path="/dashboard" exact>
-                    <DashboardPage />
+                    <DashboardPage name={name}/>
                 </Route>
                 <Route>
                     <NotFoundPage />
