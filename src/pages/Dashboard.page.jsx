@@ -1,18 +1,25 @@
-import React from 'react';
-import Navbar from '../components/Navbar';
+import React from "react";
+import Navbar from "../components/Navbar";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const DashboardPage = (props) => {
-    const [counter, setCounter] = React.useState(0);
-    return <>
-        <Navbar name={props.name} />
-        <div className="mt-10 flex justify-center items-center">
-            <button onClick={() => setCounter((counter) => counter - 1)} className="border px-8 py-2 
-            bg-gray-300 rounded-md hover:bg-gray-400 mx-4">-</button>
-            <span className="text-2xl font-serif">{counter}</span>
-            <button onClick={() => setCounter((counter) => counter + 1)} className="border px-8 py-2 
-            bg-gray-300 rounded-md hover:bg-gray-400 mx-4">+</button>
+  const username = useSelector((state) => state.userName);
+  return (
+    <>
+      <Navbar name={props.name} />
+      <div className="flex flex-col justify-center items-center">
+        {username ? <h1 className="font-sans text-2xl mt-4 mb-4 text-blue-500">{`Welcome ${username}`}</h1> : <h1 className="font-sans text-2xl mt-4 mb-4 text-blue-500">{`Welcome User`}</h1>}
+        <div>
+          <Link to="/login">
+            <button className="border bg-gray-400 text-center px-4 py-2 rounded-md hover:bg-gray-300">
+              Logout
+            </button>
+          </Link>
         </div>
+      </div>
     </>
+  );
 };
 
 export default React.memo(DashboardPage);
